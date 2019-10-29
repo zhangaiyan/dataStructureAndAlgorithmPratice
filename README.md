@@ -1,2 +1,3 @@
 # dataStructureAndAlgorithmPratice
 数据结构和算法练习
+用于平常练习数据结构和算法demo
