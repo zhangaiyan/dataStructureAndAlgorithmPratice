@@ -1,4 +1,9 @@
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
+import java.util.Random;
+
+import static sun.net.ftp.FtpReplyCode.find;
 
 /**
  * @author zhangchaoyue
@@ -7,8 +12,13 @@ import java.util.Arrays;
 public class PraticeForArray {
 
     public static void main(String[] args) {
-        int[] array = new int[]{1, 2, 3, 3, 4, 13, 12, 12, 12, 1};
-        System.out.println(array[0]);
+        CustomizeArrayList array = new CustomizeArrayList(100000000);
+        for (int i = 0; i < 100000000; i++) {
+            array.add(i);
+        }
+        long startTime = System.currentTimeMillis();
+        array.find(new Random().nextInt(100000000));
+        System.out.println(System.currentTimeMillis() - startTime);
     }
 }
 
@@ -104,7 +114,7 @@ class CustomizeArrayList<E> {
         // oldCapacity >> 1相当于除2操作
         int newCapacity = oldCapacity + (oldCapacity >> 1);
         //防止数组长度溢出
-        if (newCapacity - oldCapacity < 0) {
+        if (newCapacity - minCapacity < 0) {
             newCapacity = minCapacity;
         }
         if (newCapacity - MAX_ARRAY_SIZE > 0) {
@@ -160,31 +170,55 @@ class CustomizeArrayList<E> {
         if (numMoved > 0) {
             System.arraycopy(elementData, index + 1, elementData, index, numMoved);
         }
+        elementData[--size] = null;
         return oldValue;
     }
 
     /**
-     * 二分法查找数组中的某一个值
+     * 二分法查找有序数组中的某一个元素
      *
-     * @param value
+     * @param searchKey
      */
-    public void find(int value) {
+    public int find(int searchKey) {
+        int lowerBound = 0;
+        int upperBound = size - 1;
+        int curIndex;
+        while (true) {
+            curIndex = (lowerBound + upperBound) / 2;
+            if (elementData[curIndex].equals(searchKey)) {
+                //find it
+                return curIndex;
+            } else if (lowerBound > upperBound) {
+                //not find
+                return size;
+            } else {
+                if ((int) elementData[curIndex] < searchKey) {
+                    //in upper half
+                    lowerBound = curIndex + 1;
+                } else {
+                    //in lower half
+                    upperBound = curIndex - 1;
+                }
+            }
+        }
     }
 
     /**
-     * 对数组进行排序
+     * 添加元素时范围检查
+     *
+     * @param index
      */
-    public void sort() {
-
-    }
-
-
     private void rangeCheckForAdd(int index) {
         if (index > size || index < 0) {
             throw new IndexOutOfBoundsException(outOfBoundsMsg(index));
         }
     }
 
+    /**
+     * 范围检查
+     *
+     * @param index
+     */
     private void rangeCheck(int index) {
         if (index >= size) {
             throw new IndexOutOfBoundsException(outOfBoundsMsg(index));
@@ -194,6 +228,5 @@ class CustomizeArrayList<E> {
     private String outOfBoundsMsg(int index) {
         return "Index: " + index + ", Size: " + size;
     }
-
 }
 
