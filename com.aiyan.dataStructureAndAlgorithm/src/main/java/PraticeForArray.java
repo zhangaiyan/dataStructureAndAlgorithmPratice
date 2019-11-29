@@ -171,7 +171,7 @@ class CustomizeArrayList<E> {
     }
 
     /**
-     * 二分法查找有序数组中的某一个元素
+     * 二分法查找有序数组中的某一个元素--只能应用于有序的数据
      *
      * @param searchKey
      */
