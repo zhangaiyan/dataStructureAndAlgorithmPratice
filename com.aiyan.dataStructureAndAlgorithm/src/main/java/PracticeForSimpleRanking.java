@@ -2,7 +2,7 @@
  * @author zhangchaoyue
  * @date 2019/11/29
  */
-public class PraticeForSimpleRanking {
+public class PracticeForSimpleRanking {
 
     public static void main(String[] args) {
         int[] arr = generateRandom();

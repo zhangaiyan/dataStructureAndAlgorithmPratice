@@ -5,7 +5,7 @@ import java.util.Random;
  * @author zhangchaoyue
  * @date 2019/10/31
  */
-public class PraticeForArray {
+public class PracticeForArray {
 
     public static void main(String[] args) {
         CustomizeArrayList array = new CustomizeArrayList(100000000);
