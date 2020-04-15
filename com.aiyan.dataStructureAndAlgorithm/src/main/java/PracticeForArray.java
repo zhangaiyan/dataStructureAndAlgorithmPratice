@@ -33,7 +33,7 @@ class CustomizeArrayList<E> {
     /**
      * 没有初始化的大小的共享数组实例，当第一个元素添加时扩容
      */
-    private static final Object[] DEFAULTCAPICITY_EMPTY_ELEMENTDATA = {};
+    private static final Object[] DEFAULT_CAPICITY_EMPTY_ELEMENTDATA = {};
 
     /**
      * 数组允许分配的最大长度
@@ -62,7 +62,7 @@ class CustomizeArrayList<E> {
     }
 
     public CustomizeArrayList() {
-        this.elementData = DEFAULTCAPICITY_EMPTY_ELEMENTDATA;
+        this.elementData = DEFAULT_CAPICITY_EMPTY_ELEMENTDATA;
     }
 
     /**
@@ -82,7 +82,7 @@ class CustomizeArrayList<E> {
      * @return
      */
     private static int calculateCapacity(Object[] elementData, int minCapacity) {
-        if (elementData == DEFAULTCAPICITY_EMPTY_ELEMENTDATA) {
+        if (elementData == DEFAULT_CAPICITY_EMPTY_ELEMENTDATA) {
             return Math.max(DEFAULT_CAPICITY, minCapacity);
         }
         return minCapacity;
